@@ -64,7 +64,7 @@
     window.scrollTo(0, 0);
     document.body.style.overflow = "hidden";
 
-    let lightbox = document.querySelector('.lightbox')
+    let lightbox = document.querySelector('.lightbox');
     let lightboxImg = lightbox.querySelector('img');
     let lightboxDesc = lightbox.querySelector('p');
     let lightboxClose = lightbox.querySelector('.close-lightbox');
@@ -74,13 +74,14 @@
       lightboxDesc.innerHTML = currentObject.imageDescription[currentIndex];
 
       lightboxClose.addEventListener('click', closeLightbox, false);
+
+      function closeLightbox() {
+         //reset everything, close the lightbox
+         //debugger;
+         lightbox.style.display = "none";
+       }
   }
 
- function closeLightbox() {
-    //reset everything, close the lightbox
-    //debugger;
-    lightbox.style.display = "none";
-  }
   //documet.querySelector('#spring').click();
   changeElements.call(document.querySelector('#spring'));
 })();
