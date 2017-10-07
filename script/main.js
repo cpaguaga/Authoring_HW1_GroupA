@@ -17,13 +17,18 @@
         }
 
         // add the images to the bottom of the page
-        objectIndex.images.forEach(function (image,index) {
+        objectIndex.images.forEach(function (image, index) {
             //create an image element
           let newSubImg = document.createElement('img');
           // add a css class to it
           newSubImg.classList.add('thumb')
           //set the src
           newSubImg.src = "images/" + objectIndex.images[index];
+
+          newSubImg.dataset.index = index;
+
+          //add an event handledr to trigger a lightbox
+          newSubImg.addEventListener('click', function() { popLightbox(index, objectIndex); }, false);
           //add it to the page
           subImages.appendChild(newSubImg);
         });
@@ -50,5 +55,32 @@
   })
 
   //document.querySelector('#spring').click();
+  changeElements.call(document.querySelector('#spring'));
+
+  //trigger the lightbox
+  function popLightbox(currentIndex, currentObject) {
+    // debugger;
+    // move the window to the top every time we click - quick bug fix
+    window.scrollTo(0, 0);
+    document.body.style.overflow = "hidden";
+
+    let lightbox = document.querySelector('.lightbox')
+    let lightboxImg = lightbox.querySelector('img');
+    let lightboxDesc = lightbox.querySelector('p');
+    let lightboxClose = lightbox.querySelector('.close-lightbox');
+
+      lightbox.style.display = "block";
+      lightboxImg.src = "images/" + currentObject.images[currentIndex];
+      lightboxDesc.innerHTML = currentObject.imageDescription[currentIndex];
+
+      lightboxClose.addEventListener('click', closeLightbox, false);
+  }
+
+ function closeLightbox() {
+    //reset everything, close the lightbox
+    //debugger;
+    lightbox.style.display = "none";
+  }
+  //documet.querySelector('#spring').click();
   changeElements.call(document.querySelector('#spring'));
 })();
